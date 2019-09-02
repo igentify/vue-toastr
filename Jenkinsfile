@@ -1,1 +1,1 @@
-softwareNPMbuildPlugin()
+softwareNPMbuildPlugin(packageType: 'npm')
