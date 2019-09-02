@@ -5,6 +5,7 @@
   "author": "s4l1h",
   "scripts": {
     "build": "vue-cli-service build",
+    "build:prod": "vue-cli-service build",
     "test": "vue-cli-service test",
     "lint": "vue-cli-service lint",
     "demo": "vue-cli-service demo",
