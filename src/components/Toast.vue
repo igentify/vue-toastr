@@ -3,7 +3,6 @@
     v-bind:style="data.style"
     v-bind:class="classNames"
     style="display: block;"
-    @click="clicked()"
     v-on:mouseover="onMouseOver"
     v-on:mouseout="onMouseOut"
   >
@@ -12,30 +11,37 @@
       :percent="progressBarPercent"
       ref="progressBar"
     ></toast-progress>
-    <div v-if="data.title" class="toast-title" v-html="data.title"></div>
+    <div v-if="data.title"
+         class="toast-title"
+         v-html="data.title"></div>
     <div
       v-if="data.msg && !$slots.default"
       class="toast-message"
       v-html="data.msg"
     ></div>
-    <div v-if="$slots.default" class="toast-message">
+    <div v-if="$slots.default"
+         class="toast-message">
       <slot></slot>
     </div>
+    <span class="close-btn fas fa-times"
+          @click="clicked">
+    </span>
   </div>
 </template>
 <script>
 import ToastProgress from "./ToastProgress.vue";
 import IntervalTimeManager from "./IntervalTimeManager.js";
+
 export default {
   components: {
-    ToastProgress
+    ToastProgress,
   },
   props: ["data"],
   data() {
     return {
       progressbar: false,
       progressBarTimer: null,
-      timeoutTimer: null
+      timeoutTimer: null,
     };
   },
   mounted() {
@@ -56,14 +62,14 @@ export default {
           "after:finish": () => {
             this.close();
             // console.log("Timeout Fired");
-          }
-        }
+          },
+        },
       });
       // SetUP progressbar Time Manager
       if (this.data.progressbar !== false) {
         this.progressbar = true;
         this.progressBarTimer = IntervalTimeManager({
-          totalTime: this.data.timeout
+          totalTime: this.data.timeout,
         });
       }
     } else if (
@@ -82,7 +88,7 @@ export default {
         return this.data.progressBarValue;
       }
       return this.progressBarTimer.getPercent();
-    }
+    },
   },
   beforeDestroy() {
     if (this.progressBarTimer != null) {
@@ -148,7 +154,7 @@ export default {
       if (this.$parent != null) {
         this.$parent.Close(this.data);
       }
-    }
-  }
+    },
+  },
 };
 </script>
