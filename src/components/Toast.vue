@@ -5,6 +5,7 @@
     style="display: block;"
     v-on:mouseover="onMouseOver"
     v-on:mouseout="onMouseOut"
+    @click="onClickToast"
   >
     <toast-progress
       v-if="progressbar"
@@ -100,6 +101,11 @@ export default {
     }
   },
   methods: {
+    onClickToast(e) {
+      if (e.target.className.indexOf('toast-link') !== -1) {
+        this.clickClose();
+      }
+    },
     // Enter Hover
     onMouseOver() {
       // console.log("onMouseOver")
